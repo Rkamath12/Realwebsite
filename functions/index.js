@@ -142,3 +142,5 @@ function searchResults(name){
 
 //Exporting 
 exports.index = functions.https.onRequest(index);
+
+<script src="https://apis.google.com/js/platform.js" async defer></script>
