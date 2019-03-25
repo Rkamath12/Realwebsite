@@ -15,6 +15,8 @@ firebase.initializeApp({
     databaseURL: "https://erecipe-c0df7.firebaseio.com"
 },'admin');
 
+var functions = firebase.app().functions('us-central1');
+
 //Initialization
 const firebaseApp = firebase.initializeApp(
     functions.config().firebase
