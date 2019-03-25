@@ -35,6 +35,7 @@
 </head>
 <body> 
 <div class="container">
+  <h2>Upload Recipe</h2>
   <!-- Button to Open the Modal -->
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
     Upload Recipe
@@ -50,7 +51,7 @@
         </div>       
 <div class="modal-body">
 <form>
-<class="form-group">
+<div class="form-group">
             <label for="Recipe Name">Name:</label>
             <input type="Name" class="form-control" id="Name" placeholder="Enter name of recipe" name="recipe name">
         </div>
@@ -72,22 +73,17 @@
         <input type="cuisine" class="form-control" id="difficulty" placeholder="Enter cuisine (FR-french)" name="difficulty">
         </div>
         <div class="form-group">
-          <label for="size">Serving Size:</label>
+          <label for="pwd">Serving Size:</label>
           <input type="size input" class="form-control" id="size" placeholder="Serving Size" name="size input">
         </div>
         <div class="form-group">
-          <label for="ingred">Ingredients:</label>
+          <label for="pwd">Ingredients:</label>
           <input type="ingredient input" class="form-control" id="ingredients" placeholder="Enter ingredients"
             name="ingredients input">
         </div>
         <div class="form-group">
           <label for="pwd">Procudure:</label>
           <input type="procudure" class="form-control" id="procudure" placeholder="Enter steps"
-            name="procudure">
-        </div>
-        <div class="form-group">
-          <label for="file">File Upload:</label>
-          <input type="file upload" class="form-control" id="file" placeholder="Upload file"
             name="procudure">
         </div>
         <div class="checkbox">
@@ -114,7 +110,7 @@
   </div>
 </div>
   <form class="form-inline">
-    <input class="form-control mr-sm-1" type="search" placeholder="Search" aria-label="Search">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
   </form>
     </nav>
@@ -269,10 +265,7 @@
       </div>
     </div>
 </div>
-
 {{!-- Modals --}}
-
-
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -281,5 +274,4 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
     integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   </body>
-
 </html>
