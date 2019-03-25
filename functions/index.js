@@ -1,10 +1,5 @@
-//Requirements
-const fire = require('firebase');
 const functions = require('firebase-functions');
-const express = require('express');
-const engines = require('consolidate');
 const firebase = require('firebase-admin');
-const bodyParser = require('body-parser');
 
 firebase.initializeApp({
     credential: firebase.credential.cert({
@@ -15,130 +10,58 @@ firebase.initializeApp({
     databaseURL: "https://erecipe-c0df7.firebaseio.com"
 },'admin');
 
-//Initialization
-const firebaseApp = firebase.initializeApp(
-    functions.config().firebase
-);
+var messagesRef = firebase.database().ref('messages');
 
-const index = express();
-index.engine('hbs', engines.handlebars);
-index.set('views', './views');
-index.set('view engine', 'hbs');
+document.getElementById('Form').addEventListener('submit', submitForm);
 
+// Submit form
+function submitForm(e){
+  e.preventDefault();
 
-index.use(bodyParser.urlencoded({
-    extended:true
-}));
+  // Get values
+  var name = getInputVal('name');
+var cooking time = getInputVal('cooking time');
+var prep time = getInputVal('prep time');
+var difficulty = getInputVal('difficulty');
+var cuisine = getInputVal('cuisine');
+var ingredients= getInputVal('ingredients');
+var procudure = getInputVal('procudure');
+var file upload = getInputVal('file upload');
+  
+  // Save message
+  saveMessage(name, company, email, phone, message);
 
-index.use(bodyParser.json())
+  // Show alert
+  document.querySelector('.alert').style.display = 'block';
 
+  // Hide alert after 3 seconds
+  setTimeout(function(){
+    document.querySelector('.alert').style.display = 'none';
+  },3000);
 
-//HTTPS GET requests
-    //Index render at '/'
-index.get('/',(request,response) => {
-    response.render('index');
-});
-
-//HTTPS POST requests
-    //Database interaction when recieving data
-index.post('/',(request, response) => {
-    addRecipe(request.body.name,request.body.id,request.body.user,request.body.cuisine,request.body.time,
-        request.body.serving,request.body.ingredients,request.body.difficulty,request.body.procedure);
-        response.send("200 OK");
-})
-
-index.post('/update',(req,res)=>{
-    updateRating(req.body.key,req.body.value_rating)
-    res.send("200 OK")
-})
-
-//Database
-var database = firebase.database();
-var db = firebase.firestore();
-var recipeRef = db.collection('recipes');
-
-function addRecipe(name, id, user, cuisine, time, serving, ingredients, difficulty, procedure){
-    var addDoc = db.collection('recipes').add({
-        name: name,
-        id: id,
-        user: user,
-        cuisine: cuisine,
-        time: time,
-        serving: serving,
-        ingredients: ingredients,
-        difficulty: difficulty,
-        procedure: procedure,
-        num_rating: 0,
-        total_rating: 0
-      }).then(ref => {
-        console.log('Added document with ID: ', ref.id);
-        return 1;
-      });
+  // Clear form
+  document.getElementById('contactForm').reset();
 }
 
-//Authentication
-
-var provider = new fire.auth.GoogleAuthProvider();
-function googleLogin(){
-    firebase.auth().signInWithPopup(provider).then((result) => {
-        var token = result.credential.accessToken;
-        var user = result.user;
-        return 1;
-    }).catch((error) => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        var email = error.email;
-        var credential = error.credential;
-    });
+// Function to get get form values
+function getInputVal(id){
+  return document.getElementById(id).value;
 }
 
-
-
-
-//Get Rating
-
-function getRating(total_rating, num_rating){
-    rating = total_rating/num_rating
-    return rating
-}
-
-//Update Rating
-function updateRating(key,value_rating){
-    var recipeRating = db.collection('recipes').doc(key)
-    var transaction = db.runTransaction(t => {
-        return t.get(recipeRating)
-          .then(doc => {
-            var new_num_rating = doc.data().num_rating + 1;
-            t.update(recipeRating, {num_rating:new_num_rating});
-            var new_total_rating = doc.data().total_rating + value_rating;
-            t.update(recipeRating, {total_rating:new_total_rating});
-            return 1;
-          });
-      }).then(result => {
-        console.log('Transaction success!');
-        return 1;
-      }).catch(err => {
-        console.log('Transaction failure:', err);
-      });
-}
-
-//Filter
-
-function filterResults(ingredients){
-    var recipes = db.collection('recipe');
-    ingredients.forEach(element => {
-        recipes = recipes.where('ingredients','array-contains',element)
-    });
-    return recipes
-}
-
-//Search
-
-function searchResults(name){
-    var recipes = db.collection('recipe').where('name','==', name)
-    return recipes
-}
-
+// Save message to firebase
+function saveMessage(name,cooking time,prep time,difficulty,cuisine,serving size,ingredients,procudure,file upload){
+  var newMessageRef = messagesRef.push();
+  newMessageRef.set({
+name:name
+cooking time:cooking time
+prep time:prep time
+difficulty:difficulty
+cuisine:cuisine
+serving size:ingredients
+ingredients:ingredients
+procudure:procudure
+file upload:file upload
+  });
 
 //Exporting 
 exports.index = functions.https.onRequest(index);
