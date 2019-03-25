@@ -1,5 +1,6 @@
 {
   "projects": {
-    "erecipe": "erecipe-c0df7"
+    "erecipe": "erecipe-c0df7",
+    "default": "erecipe-c0df7"
   }
 }

@@ -1,0 +1,31 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "IT",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "Name",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "Difficulty",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "Cuisine",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "Ingredients",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "Procudure",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}
