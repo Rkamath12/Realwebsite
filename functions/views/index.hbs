@@ -34,8 +34,10 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body> 
+  <div class="container"></div>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    Upload Recipe
 <div class="container">
-  <h2>Upload Recipe</h2>
   <!-- Button to Open the Modal -->
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
     Upload Recipe
@@ -73,17 +75,22 @@
         <input type="cuisine" class="form-control" id="difficulty" placeholder="Enter cuisine (FR-french)" name="difficulty">
         </div>
         <div class="form-group">
-          <label for="pwd">Serving Size:</label>
+          <label for="size">Serving Size:</label>
           <input type="size input" class="form-control" id="size" placeholder="Serving Size" name="size input">
         </div>
         <div class="form-group">
-          <label for="pwd">Ingredients:</label>
+          <label for="ingred">Ingredients:</label>
           <input type="ingredient input" class="form-control" id="ingredients" placeholder="Enter ingredients"
             name="ingredients input">
         </div>
         <div class="form-group">
           <label for="pwd">Procudure:</label>
           <input type="procudure" class="form-control" id="procudure" placeholder="Enter steps"
+            name="procudure">
+        </div>
+        <div class="form-group">
+          <label for="file">File Upload:</label>
+          <input type="file upload" class="form-control" id="file" placeholder="Upload file"
             name="procudure">
         </div>
         <div class="checkbox">
@@ -110,7 +117,7 @@
   </div>
 </div>
   <form class="form-inline">
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <input class="form-control mr-sm-1" type="search" placeholder="Search" aria-label="Search">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
   </form>
     </nav>
